@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace OOPpaint1
+namespace LibraryFigure
 {
-    class Figure
+    public class Figure
     {
         public Point pointBegin, pointEnd;
         public virtual void Draw(Graphics g) { }
@@ -18,6 +18,5 @@ namespace OOPpaint1
             pointBegin = begin;
             pointEnd = end;
         }
-
     }
 }

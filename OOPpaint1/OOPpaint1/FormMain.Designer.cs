@@ -39,6 +39,8 @@
             this.holstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxFigures = new System.Windows.Forms.GroupBox();
+            this.radioButtonSquare = new System.Windows.Forms.RadioButton();
+            this.radioButtonCircle = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFigures.SuspendLayout();
             this.SuspendLayout();
@@ -96,7 +98,7 @@
             // radioButtonTriangle
             // 
             this.radioButtonTriangle.Appearance = System.Windows.Forms.Appearance.Button;
-            this.radioButtonTriangle.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radioButtonTriangle.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radioButtonTriangle.Location = new System.Drawing.Point(58, 30);
             this.radioButtonTriangle.Name = "radioButtonTriangle";
             this.radioButtonTriangle.Size = new System.Drawing.Size(40, 40);
@@ -149,6 +151,8 @@
             // 
             // groupBoxFigures
             // 
+            this.groupBoxFigures.Controls.Add(this.radioButtonCircle);
+            this.groupBoxFigures.Controls.Add(this.radioButtonSquare);
             this.groupBoxFigures.Controls.Add(this.radioButtonLine);
             this.groupBoxFigures.Controls.Add(this.radioButtonRect);
             this.groupBoxFigures.Controls.Add(this.radioButtonEllipse);
@@ -156,10 +160,36 @@
             this.groupBoxFigures.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBoxFigures.Location = new System.Drawing.Point(12, 66);
             this.groupBoxFigures.Name = "groupBoxFigures";
-            this.groupBoxFigures.Size = new System.Drawing.Size(204, 87);
+            this.groupBoxFigures.Size = new System.Drawing.Size(204, 137);
             this.groupBoxFigures.TabIndex = 6;
             this.groupBoxFigures.TabStop = false;
             this.groupBoxFigures.Text = "Standard figures:";
+            // 
+            // radioButtonSquare
+            // 
+            this.radioButtonSquare.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioButtonSquare.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radioButtonSquare.Location = new System.Drawing.Point(11, 79);
+            this.radioButtonSquare.Name = "radioButtonSquare";
+            this.radioButtonSquare.Size = new System.Drawing.Size(40, 40);
+            this.radioButtonSquare.TabIndex = 5;
+            this.radioButtonSquare.TabStop = true;
+            this.radioButtonSquare.Text = " Squ";
+            this.radioButtonSquare.UseVisualStyleBackColor = true;
+            this.radioButtonSquare.Click += new System.EventHandler(this.radioButtonSquare_Click);
+            // 
+            // radioButtonCircle
+            // 
+            this.radioButtonCircle.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioButtonCircle.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radioButtonCircle.Location = new System.Drawing.Point(58, 79);
+            this.radioButtonCircle.Name = "radioButtonCircle";
+            this.radioButtonCircle.Size = new System.Drawing.Size(40, 40);
+            this.radioButtonCircle.TabIndex = 6;
+            this.radioButtonCircle.TabStop = true;
+            this.radioButtonCircle.Text = " Circ";
+            this.radioButtonCircle.UseVisualStyleBackColor = true;
+            this.radioButtonCircle.Click += new System.EventHandler(this.radioButtonCircle_Click_1);
             // 
             // FormMain
             // 
@@ -194,6 +224,8 @@
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
         public System.Windows.Forms.RadioButton radioButtonRect;
         private System.Windows.Forms.GroupBox groupBoxFigures;
+        public System.Windows.Forms.RadioButton radioButtonSquare;
+        public System.Windows.Forms.RadioButton radioButtonCircle;
     }
 }
 

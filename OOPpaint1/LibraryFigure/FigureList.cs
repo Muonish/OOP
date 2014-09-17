@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
-namespace OOPpaint1
+namespace LibraryFigure
 {
-    class FigureList
+    public class FigureList
     {
         private List<Figure> listFigure;
+        private Graphics holst;
 
-        public FigureList()
+        public FigureList(Graphics g)
         {
+            holst = g;
             listFigure = new List<Figure>();
         }
 
@@ -23,19 +26,13 @@ namespace OOPpaint1
         {
             listFigure.Clear();
         }
-    
+
         public void DrawList()
         {
-            for (int i = 0; i < listFigure.Count; i++ )
+            foreach (Figure f in listFigure)
             {
-                listFigure[i].Draw(FormMain.GpanelHolst);
+                f.Draw(holst);
             }
-                
-        
         }
     }
-
-
-
-
 }

@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace OOPpaint1
+
+namespace LibraryFigure
 {
-    class Rectangle : Figure
+    public class Rectangle : Figure
     {
         public Rectangle(Point begin, Point end) : base(begin, end)
         {

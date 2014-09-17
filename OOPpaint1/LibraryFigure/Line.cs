@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace OOPpaint1
+namespace LibraryFigure
 {
-    class Line : Figure
+    public class Line : Figure
     {
         public Line(Point begin, Point end) : base(begin, end)
         {

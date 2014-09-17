@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Input;
+using LibraryFigure;
 
 namespace OOPpaint1
 {
@@ -17,7 +17,8 @@ namespace OOPpaint1
         public static FormDialog formD;
         public bool fTracking = false;
         Point pointBegin, pointEnd;
-        FigureList figlst = new FigureList();
+        FigureList figlst;
+        Figure o;
 
         public FormMain()
         {
@@ -25,6 +26,7 @@ namespace OOPpaint1
             //formD.Hide();
             formD = new FormDialog();
             GpanelHolst = panelHolst.CreateGraphics();
+            figlst = new FigureList(GpanelHolst);
                 
         }
 
@@ -34,6 +36,8 @@ namespace OOPpaint1
             radioButtonRect.Checked = false;
             radioButtonEllipse.Checked = false;
             radioButtonTriangle.Checked = false;
+            radioButtonSquare.Checked = false;
+            radioButtonCircle.Checked = false;
         }
 
         private void radioButtonLine_Click(object sender, EventArgs e)
@@ -42,6 +46,8 @@ namespace OOPpaint1
             radioButtonRect.Checked = false;
             radioButtonEllipse.Checked = false;
             radioButtonTriangle.Checked = false;
+            radioButtonSquare.Checked = false;
+            radioButtonCircle.Checked = false;
         }
 
         private void radioButtonCircle_Click(object sender, EventArgs e)
@@ -50,6 +56,8 @@ namespace OOPpaint1
             radioButtonRect.Checked = false;
             radioButtonEllipse.Checked = true;
             radioButtonTriangle.Checked = false;
+            radioButtonSquare.Checked = false;
+            radioButtonCircle.Checked = false;
         }
 
         private void radioButtonRect_Click(object sender, EventArgs e)
@@ -58,6 +66,8 @@ namespace OOPpaint1
             radioButtonRect.Checked = true;
             radioButtonEllipse.Checked = false;
             radioButtonTriangle.Checked = false;
+            radioButtonSquare.Checked = false;
+            radioButtonCircle.Checked = false;
         }
         private void radioButtonTriangle_Click(object sender, EventArgs e)
         {
@@ -65,6 +75,8 @@ namespace OOPpaint1
             radioButtonRect.Checked = false;
             radioButtonEllipse.Checked = false;
             radioButtonTriangle.Checked = true;
+            radioButtonSquare.Checked = false;
+            radioButtonCircle.Checked = false;
         }
 
         private void panelHolst_MouseDown(object sender, MouseEventArgs e)
@@ -81,12 +93,16 @@ namespace OOPpaint1
             pointEnd.Y = MousePosition.Y - this.Location.Y - panelHolst.Location.Y - 31;
             if (radioButtonLine.Checked) figlst.addToList(new Line(pointBegin, pointEnd));
             else
-                if (radioButtonRect.Checked) figlst.addToList(new Rectangle(pointBegin, pointEnd));
+                if (radioButtonRect.Checked) figlst.addToList(new LibraryFigure.Rectangle(pointBegin, pointEnd));
                 else
                     if (radioButtonEllipse.Checked) figlst.addToList(new Ellipse(pointBegin, pointEnd));
                     else
                         if (radioButtonTriangle.Checked) figlst.addToList(new Triangle(pointBegin, pointEnd));
                         else
+                            if (radioButtonSquare.Checked) figlst.addToList(new Square(pointBegin, pointEnd));
+                            else
+                                if (radioButtonCircle.Checked) figlst.addToList(new Circle(pointBegin, pointEnd));
+                                else
                             figlst.addToList(new CustomFigure(pointBegin, pointEnd, formD.N));
             figlst.DrawList();
         }
@@ -104,6 +120,28 @@ namespace OOPpaint1
             radioButtonRect.Checked = false;
             radioButtonEllipse.Checked = false;
             radioButtonTriangle.Checked = false;
+            radioButtonSquare.Checked = false;
+            radioButtonCircle.Checked = false;
+        }
+
+        private void radioButtonSquare_Click(object sender, EventArgs e)
+        {
+            radioButtonLine.Checked = false;
+            radioButtonRect.Checked = false;
+            radioButtonEllipse.Checked = false;
+            radioButtonTriangle.Checked = false;
+            radioButtonSquare.Checked = true;
+            radioButtonCircle.Checked = false;
+        }
+
+        private void radioButtonCircle_Click_1(object sender, EventArgs e)
+        {
+            radioButtonLine.Checked = false;
+            radioButtonRect.Checked = false;
+            radioButtonEllipse.Checked = false;
+            radioButtonTriangle.Checked = false;
+            radioButtonSquare.Checked = false;
+            radioButtonCircle.Checked = true;
         }
 
     }

@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOPpaint1", "OOPpaint1\OOPp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FD7B0CBC-CCA4-4FC8-82EA-2ED3189D0CC7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryFigure", "LibraryFigure\LibraryFigure.csproj", "{14807CFC-1041-486B-AD1C-2766442B58C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{847F4277-3793-49DD-BC8F-D1918B8138EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{847F4277-3793-49DD-BC8F-D1918B8138EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{847F4277-3793-49DD-BC8F-D1918B8138EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14807CFC-1041-486B-AD1C-2766442B58C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14807CFC-1041-486B-AD1C-2766442B58C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14807CFC-1041-486B-AD1C-2766442B58C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14807CFC-1041-486B-AD1C-2766442B58C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

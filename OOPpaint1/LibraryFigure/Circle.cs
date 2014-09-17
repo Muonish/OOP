@@ -5,18 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace OOPpaint1
+namespace LibraryFigure
 {
-    class Ellipse : Figure
+    class Circle : Ellipse
     {
-
-        public Ellipse(Point begin, Point end) : base(begin, end)
+        public Circle(Point begin, Point end) : base(begin, end)
         {
         }
 
         public override void Draw(Graphics g)
         {
-            g.DrawEllipse(new Pen(Color.Black, 2F), pointBegin.X, pointBegin.Y, 
+            g.DrawEllipse(new Pen(Color.Black, 2F), pointBegin.X, pointBegin.Y,
                                                   pointEnd.X - pointBegin.X, pointEnd.Y - pointBegin.Y);
         }
     }
