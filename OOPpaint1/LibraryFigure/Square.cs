@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Xml.Serialization;
 
 namespace LibraryFigure
 {
-    class Square : Rectangle
+    [XmlType("Square")]
+    public class Square : Rectangle
     {
+        public Square() { }
         public Square(Point begin, Point end) : base(begin, end)
         {
         }

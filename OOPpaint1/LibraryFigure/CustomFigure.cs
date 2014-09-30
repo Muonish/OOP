@@ -4,13 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Xml.Serialization;
 
 namespace LibraryFigure
 {
+    [XmlType("CustomFigure")]
     public class CustomFigure : Figure
     {
-        int N;
+        [XmlElement("N")]
+        public int N;
 
+        public CustomFigure() { }
         public CustomFigure(Point begin, Point end, int n) : base(begin, end)
         {
             N = n;

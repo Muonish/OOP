@@ -8,22 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LibraryFigure;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace OOPpaint1
 {
     public partial class FormMain : Form
     {
+  
         public static Graphics GpanelHolst;
         public static FormDialog formD;
         public bool fTracking = false;
         Point pointBegin, pointEnd;
         FigureList figlst;
-        Figure o;
 
         public FormMain()
         {
             InitializeComponent();
-            //formD.Hide();
             formD = new FormDialog();
             GpanelHolst = panelHolst.CreateGraphics();
             figlst = new FigureList(GpanelHolst);
@@ -142,6 +143,35 @@ namespace OOPpaint1
             radioButtonTriangle.Checked = false;
             radioButtonSquare.Checked = false;
             radioButtonCircle.Checked = true;
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog.ShowDialog();            
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog.ShowDialog();
+        }
+
+        private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            XmlSerializer writer = new XmlSerializer(typeof(FigureList));
+
+            FileStream file = File.Create(saveFileDialog.FileName);
+            writer.Serialize(file, figlst);
+            file.Close();
+        }
+
+        private void openFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            XmlSerializer reader = new XmlSerializer(typeof(FigureList));
+
+            StreamReader file = new StreamReader(openFileDialog.FileName);
+            figlst = (FigureList)reader.Deserialize(file);
+            figlst.holst = GpanelHolst;
+            figlst.DrawList();
         }
 
     }

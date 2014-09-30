@@ -34,13 +34,18 @@
             this.radioButtonEllipse = new System.Windows.Forms.RadioButton();
             this.radioButtonTriangle = new System.Windows.Forms.RadioButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.figureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.holstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxFigures = new System.Windows.Forms.GroupBox();
-            this.radioButtonSquare = new System.Windows.Forms.RadioButton();
             this.radioButtonCircle = new System.Windows.Forms.RadioButton();
+            this.radioButtonSquare = new System.Windows.Forms.RadioButton();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFigures.SuspendLayout();
             this.SuspendLayout();
@@ -85,13 +90,13 @@
             // radioButtonEllipse
             // 
             this.radioButtonEllipse.Appearance = System.Windows.Forms.Appearance.Button;
-            this.radioButtonEllipse.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radioButtonEllipse.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radioButtonEllipse.Location = new System.Drawing.Point(105, 30);
             this.radioButtonEllipse.Name = "radioButtonEllipse";
             this.radioButtonEllipse.Size = new System.Drawing.Size(40, 40);
             this.radioButtonEllipse.TabIndex = 3;
             this.radioButtonEllipse.TabStop = true;
-            this.radioButtonEllipse.Text = " ◯";
+            this.radioButtonEllipse.Text = " ⬭";
             this.radioButtonEllipse.UseVisualStyleBackColor = true;
             this.radioButtonEllipse.Click += new System.EventHandler(this.radioButtonCircle_Click);
             // 
@@ -111,6 +116,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
             this.newToolStripMenuItem,
             this.holstToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -118,6 +124,29 @@
             this.menuStrip1.Size = new System.Drawing.Size(805, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // newToolStripMenuItem
             // 
@@ -165,19 +194,6 @@
             this.groupBoxFigures.TabStop = false;
             this.groupBoxFigures.Text = "Standard figures:";
             // 
-            // radioButtonSquare
-            // 
-            this.radioButtonSquare.Appearance = System.Windows.Forms.Appearance.Button;
-            this.radioButtonSquare.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.radioButtonSquare.Location = new System.Drawing.Point(11, 79);
-            this.radioButtonSquare.Name = "radioButtonSquare";
-            this.radioButtonSquare.Size = new System.Drawing.Size(40, 40);
-            this.radioButtonSquare.TabIndex = 5;
-            this.radioButtonSquare.TabStop = true;
-            this.radioButtonSquare.Text = " Squ";
-            this.radioButtonSquare.UseVisualStyleBackColor = true;
-            this.radioButtonSquare.Click += new System.EventHandler(this.radioButtonSquare_Click);
-            // 
             // radioButtonCircle
             // 
             this.radioButtonCircle.Appearance = System.Windows.Forms.Appearance.Button;
@@ -187,9 +203,35 @@
             this.radioButtonCircle.Size = new System.Drawing.Size(40, 40);
             this.radioButtonCircle.TabIndex = 6;
             this.radioButtonCircle.TabStop = true;
-            this.radioButtonCircle.Text = " Circ";
+            this.radioButtonCircle.Text = " ◯";
             this.radioButtonCircle.UseVisualStyleBackColor = true;
             this.radioButtonCircle.Click += new System.EventHandler(this.radioButtonCircle_Click_1);
+            // 
+            // radioButtonSquare
+            // 
+            this.radioButtonSquare.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioButtonSquare.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radioButtonSquare.Location = new System.Drawing.Point(11, 79);
+            this.radioButtonSquare.Name = "radioButtonSquare";
+            this.radioButtonSquare.Size = new System.Drawing.Size(40, 40);
+            this.radioButtonSquare.TabIndex = 5;
+            this.radioButtonSquare.TabStop = true;
+            this.radioButtonSquare.Text = " □";
+            this.radioButtonSquare.UseVisualStyleBackColor = true;
+            this.radioButtonSquare.Click += new System.EventHandler(this.radioButtonSquare_Click);
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.FileName = "FigureList";
+            this.saveFileDialog.Filter = "Serial files|*.xml";
+            this.saveFileDialog.RestoreDirectory = true;
+            this.saveFileDialog.Title = "Save";
+            this.saveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog_FileOk);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.Filter = "Serial files|*.xml";
+            this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
             // 
             // FormMain
             // 
@@ -226,6 +268,11 @@
         private System.Windows.Forms.GroupBox groupBoxFigures;
         public System.Windows.Forms.RadioButton radioButtonSquare;
         public System.Windows.Forms.RadioButton radioButtonCircle;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 

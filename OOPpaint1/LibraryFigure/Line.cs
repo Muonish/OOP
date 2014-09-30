@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Xml.Serialization;
 
 namespace LibraryFigure
 {
+    [XmlType("Line")]
     public class Line : Figure
     {
-        public Line(Point begin, Point end) : base(begin, end)
+        public Line() { }
+        public Line(Point begin, Point end): base(begin,end)
         {
-
         }
 
 

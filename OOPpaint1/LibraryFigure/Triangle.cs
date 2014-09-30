@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Xml.Serialization;
 
 namespace LibraryFigure
 {
+    [XmlType("Triangle")]
     public class Triangle : Figure
     {
-        public Triangle(Point begin, Point end) : base(begin, end)
+        public Triangle() { }
+        public Triangle(Point begin, Point end): base(begin, end)
         {
-
         }
-
 
         public override void Draw(Graphics g)
         {
