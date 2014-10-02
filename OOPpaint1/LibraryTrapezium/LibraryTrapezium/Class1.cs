@@ -1,16 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Drawing;
+using System.Xml.Serialization;
+using LibraryFigure;
 
 namespace LibraryTrapezium
 {
-    public interface IApplicationFunc
+    [XmlType("Trapezium")]
+    public class Trapezium : Figure
     {
-        void Go();
-    }
+        public Trapezium() { }
+        public Trapezium(Point begin, Point end)
+            : base(begin, end)
+        {
+        }
 
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
-    public class InfoAttribute : System.Attribute
-    {
-        public string CompanyName { get; set; }
-        public string CompanyUrl { get; set; }
+        public override void Draw(Graphics g)
+        {
+            g.DrawRectangle(new Pen(Color.Black, 2F), pointBegin.X, pointBegin.Y,
+                                                      pointEnd.X - pointBegin.X, pointEnd.Y - pointBegin.Y);
+        }
     }
 }

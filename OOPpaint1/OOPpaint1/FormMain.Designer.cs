@@ -37,7 +37,6 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.figureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.holstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,7 +71,6 @@
             this.radioButtonLine.TabStop = true;
             this.radioButtonLine.Text = " \\";
             this.radioButtonLine.UseVisualStyleBackColor = true;
-            this.radioButtonLine.Click += new System.EventHandler(this.radioButtonLine_Click);
             // 
             // radioButtonRect
             // 
@@ -85,7 +83,6 @@
             this.radioButtonRect.TabStop = true;
             this.radioButtonRect.Text = " ▭";
             this.radioButtonRect.UseVisualStyleBackColor = true;
-            this.radioButtonRect.Click += new System.EventHandler(this.radioButtonRect_Click);
             // 
             // radioButtonEllipse
             // 
@@ -98,7 +95,6 @@
             this.radioButtonEllipse.TabStop = true;
             this.radioButtonEllipse.Text = " ⬭";
             this.radioButtonEllipse.UseVisualStyleBackColor = true;
-            this.radioButtonEllipse.Click += new System.EventHandler(this.radioButtonCircle_Click);
             // 
             // radioButtonTriangle
             // 
@@ -111,13 +107,12 @@
             this.radioButtonTriangle.TabStop = true;
             this.radioButtonTriangle.Text = " △";
             this.radioButtonTriangle.UseVisualStyleBackColor = true;
-            this.radioButtonTriangle.Click += new System.EventHandler(this.radioButtonTriangle_Click);
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.newToolStripMenuItem,
+            this.figureToolStripMenuItem,
             this.holstToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -137,31 +132,22 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-            // 
-            // newToolStripMenuItem
-            // 
-            this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.figureToolStripMenuItem});
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
-            this.newToolStripMenuItem.Text = "New";
             // 
             // figureToolStripMenuItem
             // 
             this.figureToolStripMenuItem.Name = "figureToolStripMenuItem";
-            this.figureToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.figureToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.figureToolStripMenuItem.Text = "Figure";
-            this.figureToolStripMenuItem.Click += new System.EventHandler(this.figureToolStripMenuItem_Click);
             // 
             // holstToolStripMenuItem
             // 
@@ -205,7 +191,6 @@
             this.radioButtonCircle.TabStop = true;
             this.radioButtonCircle.Text = " ◯";
             this.radioButtonCircle.UseVisualStyleBackColor = true;
-            this.radioButtonCircle.Click += new System.EventHandler(this.radioButtonCircle_Click_1);
             // 
             // radioButtonSquare
             // 
@@ -218,7 +203,6 @@
             this.radioButtonSquare.TabStop = true;
             this.radioButtonSquare.Text = " □";
             this.radioButtonSquare.UseVisualStyleBackColor = true;
-            this.radioButtonSquare.Click += new System.EventHandler(this.radioButtonSquare_Click);
             // 
             // saveFileDialog
             // 
@@ -244,7 +228,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormMain";
             this.Text = "!(Paint)";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBoxFigures.ResumeLayout(false);
@@ -260,7 +243,6 @@
         public System.Windows.Forms.RadioButton radioButtonEllipse;
         public System.Windows.Forms.RadioButton radioButtonTriangle;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem figureToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem holstToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;

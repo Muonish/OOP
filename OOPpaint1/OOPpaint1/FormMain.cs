@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using LibraryFigure;
 using System.IO;
 using System.Xml.Serialization;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace OOPpaint1
 {
@@ -18,7 +20,7 @@ namespace OOPpaint1
   
         public static Graphics GpanelHolst;
         public static FormDialog formD;
-        public bool fTracking = false;
+        public static Type currentFigure;
         Point pointBegin, pointEnd;
         FigureList figlst;
 
@@ -28,70 +30,50 @@ namespace OOPpaint1
             formD = new FormDialog();
             GpanelHolst = panelHolst.CreateGraphics();
             figlst = new FigureList(GpanelHolst);
+
+            var lListOfBs = (from lAssembly in AppDomain.CurrentDomain.GetAssemblies()
+                             from lType in lAssembly.GetTypes()
+                             where typeof(Figure).IsAssignableFrom(lType)
+                             select lType).ToArray();
+
+
+
+            foreach (Type j in lListOfBs)
+            {
+                figureToolStripMenuItem.DropDownItems.Add(j.Name);
+                Debug.WriteLine(j);
+            }
+
+            foreach (ToolStripMenuItem i in figureToolStripMenuItem.DropDownItems)
+            {
                 
+                i.CheckStateChanged += new EventHandler(setCurrentFigure);
+            }
+                    //Console.WriteLine(j.Name);
+                    //MessageBox.Show(j.Name);
+            
         }
 
-        private void Form1_Paint(object sender, PaintEventArgs e)
+        private void setCurrentFigure(object sender, EventArgs e)
         {
-            radioButtonLine.Checked = true;
-            radioButtonRect.Checked = false;
-            radioButtonEllipse.Checked = false;
-            radioButtonTriangle.Checked = false;
-            radioButtonSquare.Checked = false;
-            radioButtonCircle.Checked = false;
-        }
-
-        private void radioButtonLine_Click(object sender, EventArgs e)
-        {
-            radioButtonLine.Checked = true;
-            radioButtonRect.Checked = false;
-            radioButtonEllipse.Checked = false;
-            radioButtonTriangle.Checked = false;
-            radioButtonSquare.Checked = false;
-            radioButtonCircle.Checked = false;
-        }
-
-        private void radioButtonCircle_Click(object sender, EventArgs e)
-        {
-            radioButtonLine.Checked = false;
-            radioButtonRect.Checked = false;
-            radioButtonEllipse.Checked = true;
-            radioButtonTriangle.Checked = false;
-            radioButtonSquare.Checked = false;
-            radioButtonCircle.Checked = false;
-        }
-
-        private void radioButtonRect_Click(object sender, EventArgs e)
-        {
-            radioButtonLine.Checked = false;
-            radioButtonRect.Checked = true;
-            radioButtonEllipse.Checked = false;
-            radioButtonTriangle.Checked = false;
-            radioButtonSquare.Checked = false;
-            radioButtonCircle.Checked = false;
-        }
-        private void radioButtonTriangle_Click(object sender, EventArgs e)
-        {
-            radioButtonLine.Checked = false;
-            radioButtonRect.Checked = false;
-            radioButtonEllipse.Checked = false;
-            radioButtonTriangle.Checked = true;
-            radioButtonSquare.Checked = false;
-            radioButtonCircle.Checked = false;
+            MessageBox.Show(((ToolStripMenuItem)sender).Text);
+            currentFigure = Type.GetType(((ToolStripMenuItem)sender).Text);
+            Debug.WriteLine(currentFigure, "OLOLOLOLOLO");
         }
 
         private void panelHolst_MouseDown(object sender, MouseEventArgs e)
         {
-            //fTracking = true;
             pointBegin.X = MousePosition.X - this.Location.X - panelHolst.Location.X - 10;
             pointBegin.Y = MousePosition.Y - this.Location.Y - panelHolst.Location.Y - 31;
         }
 
         private void panelHolst_MouseUp(object sender, MouseEventArgs e)
         {
-            //fTracking = false;
             pointEnd.X = MousePosition.X - this.Location.X - panelHolst.Location.X - 10;
             pointEnd.Y = MousePosition.Y - this.Location.Y - panelHolst.Location.Y - 31;
+            //foreach (RadioButton rb in groupBoxFigures.Controls)
+            //    MessageBox.Show(rb.Name.ToString());
+            /*
             if (radioButtonLine.Checked) figlst.addToList(new Line(pointBegin, pointEnd));
             else
                 if (radioButtonRect.Checked) figlst.addToList(new LibraryFigure.Rectangle(pointBegin, pointEnd));
@@ -105,6 +87,24 @@ namespace OOPpaint1
                                 if (radioButtonCircle.Checked) figlst.addToList(new Circle(pointBegin, pointEnd));
                                 else
                             figlst.addToList(new CustomFigure(pointBegin, pointEnd, formD.N));
+             */
+            //figlst.addToList(new (pointBegin, pointEnd));
+            string[] a = new string[2];
+            a[0] = pointBegin.ToString();
+            a[1] = pointEnd.ToString();
+            //a += pointBegin.ToString();
+            //a += ",";
+            //a += pointEnd.ToString();
+            object[] param = {pointBegin, pointEnd};
+            MessageBox.Show(currentFigure.Name);
+
+            ConstructorInfo inf = currentFigure.GetConstructor(new Type[] { });
+            var instance = (Figure)inf.Invoke(new object[] { });
+            ((Ellipse)instance).initDef(pointBegin, pointEnd);
+            //ConstructorInfo inf = currentFigure.GetConstructor(new Type[] { typeof(Point), typeof(Point) });
+            //var instance = (Figure)inf.Invoke(new object[] {}, param);
+
+            figlst.addToList(instance);
             figlst.DrawList();
         }
 
@@ -123,26 +123,6 @@ namespace OOPpaint1
             radioButtonTriangle.Checked = false;
             radioButtonSquare.Checked = false;
             radioButtonCircle.Checked = false;
-        }
-
-        private void radioButtonSquare_Click(object sender, EventArgs e)
-        {
-            radioButtonLine.Checked = false;
-            radioButtonRect.Checked = false;
-            radioButtonEllipse.Checked = false;
-            radioButtonTriangle.Checked = false;
-            radioButtonSquare.Checked = true;
-            radioButtonCircle.Checked = false;
-        }
-
-        private void radioButtonCircle_Click_1(object sender, EventArgs e)
-        {
-            radioButtonLine.Checked = false;
-            radioButtonRect.Checked = false;
-            radioButtonEllipse.Checked = false;
-            radioButtonTriangle.Checked = false;
-            radioButtonSquare.Checked = false;
-            radioButtonCircle.Checked = true;
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -173,6 +153,7 @@ namespace OOPpaint1
             figlst.holst = GpanelHolst;
             figlst.DrawList();
         }
+
 
     }
 }

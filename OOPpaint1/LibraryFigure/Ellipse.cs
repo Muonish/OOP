@@ -17,6 +17,12 @@ namespace LibraryFigure
            
         }
 
+        public void initDef(Point begin, Point end)
+        {
+            pointBegin = begin;
+            pointEnd = end;
+        }
+
         public override void Draw(Graphics g)
         {
             g.DrawEllipse(new Pen(Color.Black, 2F), pointBegin.X, pointBegin.Y,
