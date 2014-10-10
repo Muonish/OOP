@@ -40,25 +40,23 @@ namespace OOPpaint1
 
             foreach (Type j in lListOfBs)
             {
-                figureToolStripMenuItem.DropDownItems.Add(j.Name);
-                Debug.WriteLine(j);
+                if (j.Name != "Figure")
+                {
+                    figureToolStripMenuItem.DropDownItems.Add(j.Name);
+                    Debug.WriteLine(j);
+                }
             }
 
             foreach (ToolStripMenuItem i in figureToolStripMenuItem.DropDownItems)
             {
-                
-                i.CheckStateChanged += new EventHandler(setCurrentFigure);
-            }
-                    //Console.WriteLine(j.Name);
-                    //MessageBox.Show(j.Name);
-            
+                i.CheckedChanged += new EventHandler(setCurrentFigure);
+            }            
         }
 
         private void setCurrentFigure(object sender, EventArgs e)
         {
             MessageBox.Show(((ToolStripMenuItem)sender).Text);
             currentFigure = Type.GetType(((ToolStripMenuItem)sender).Text);
-            Debug.WriteLine(currentFigure, "OLOLOLOLOLO");
         }
 
         private void panelHolst_MouseDown(object sender, MouseEventArgs e)
@@ -100,7 +98,9 @@ namespace OOPpaint1
 
             ConstructorInfo inf = currentFigure.GetConstructor(new Type[] { });
             var instance = (Figure)inf.Invoke(new object[] { });
-            ((Ellipse)instance).initDef(pointBegin, pointEnd);
+            instance.pointBegin = pointBegin;
+            instance.pointEnd = pointEnd;
+            //((Ellipse)instance).initDef(pointBegin, pointEnd);
             //ConstructorInfo inf = currentFigure.GetConstructor(new Type[] { typeof(Point), typeof(Point) });
             //var instance = (Figure)inf.Invoke(new object[] {}, param);
 
