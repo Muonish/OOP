@@ -23,6 +23,7 @@ namespace OOPpaint1
         public static Type currentFigure;
         Point pointBegin, pointEnd;
         FigureList figlst;
+        Type[] lListOfBs;
 
         public FormMain()
         {
@@ -31,79 +32,49 @@ namespace OOPpaint1
             GpanelHolst = panelHolst.CreateGraphics();
             figlst = new FigureList(GpanelHolst);
 
-            var lListOfBs = (from lAssembly in AppDomain.CurrentDomain.GetAssemblies()
-                             from lType in lAssembly.GetTypes()
-                             where typeof(Figure).IsAssignableFrom(lType)
-                             select lType).ToArray();
+            lListOfBs = (from lAssembly in AppDomain.CurrentDomain.GetAssemblies()
+                         from lType in lAssembly.GetTypes()
+                         where typeof(Figure).IsAssignableFrom(lType)
+                         select lType).ToArray();
 
 
 
             foreach (Type j in lListOfBs)
             {
                 if (j.Name != "Figure")
-                {
                     figureToolStripMenuItem.DropDownItems.Add(j.Name);
-                    Debug.WriteLine(j);
-                }
             }
 
             foreach (ToolStripMenuItem i in figureToolStripMenuItem.DropDownItems)
             {
-                i.CheckedChanged += new EventHandler(setCurrentFigure);
+                i.Click += new EventHandler(setCurrentFigure);
             }            
         }
 
         private void setCurrentFigure(object sender, EventArgs e)
         {
-            MessageBox.Show(((ToolStripMenuItem)sender).Text);
-            currentFigure = Type.GetType(((ToolStripMenuItem)sender).Text);
+            foreach (Type j in lListOfBs)
+            {
+                if (j.Name == ((ToolStripMenuItem)sender).Text)
+                    currentFigure = j;
+            }
         }
 
         private void panelHolst_MouseDown(object sender, MouseEventArgs e)
         {
-            pointBegin.X = MousePosition.X - this.Location.X - panelHolst.Location.X - 10;
-            pointBegin.Y = MousePosition.Y - this.Location.Y - panelHolst.Location.Y - 31;
+            pointBegin.X = MousePosition.X - this.Location.X - panelHolst.Location.X - 4;
+            pointBegin.Y = MousePosition.Y - this.Location.Y - panelHolst.Location.Y - 19;
         }
 
         private void panelHolst_MouseUp(object sender, MouseEventArgs e)
         {
-            pointEnd.X = MousePosition.X - this.Location.X - panelHolst.Location.X - 10;
-            pointEnd.Y = MousePosition.Y - this.Location.Y - panelHolst.Location.Y - 31;
-            //foreach (RadioButton rb in groupBoxFigures.Controls)
-            //    MessageBox.Show(rb.Name.ToString());
-            /*
-            if (radioButtonLine.Checked) figlst.addToList(new Line(pointBegin, pointEnd));
-            else
-                if (radioButtonRect.Checked) figlst.addToList(new LibraryFigure.Rectangle(pointBegin, pointEnd));
-                else
-                    if (radioButtonEllipse.Checked) figlst.addToList(new Ellipse(pointBegin, pointEnd));
-                    else
-                        if (radioButtonTriangle.Checked) figlst.addToList(new Triangle(pointBegin, pointEnd));
-                        else
-                            if (radioButtonSquare.Checked) figlst.addToList(new Square(pointBegin, pointEnd));
-                            else
-                                if (radioButtonCircle.Checked) figlst.addToList(new Circle(pointBegin, pointEnd));
-                                else
-                            figlst.addToList(new CustomFigure(pointBegin, pointEnd, formD.N));
-             */
-            //figlst.addToList(new (pointBegin, pointEnd));
-            string[] a = new string[2];
-            a[0] = pointBegin.ToString();
-            a[1] = pointEnd.ToString();
-            //a += pointBegin.ToString();
-            //a += ",";
-            //a += pointEnd.ToString();
-            object[] param = {pointBegin, pointEnd};
-            MessageBox.Show(currentFigure.Name);
+            pointEnd.X = MousePosition.X - this.Location.X - panelHolst.Location.X - 4;
+            pointEnd.Y = MousePosition.Y - this.Location.Y - panelHolst.Location.Y - 19;
 
             ConstructorInfo inf = currentFigure.GetConstructor(new Type[] { });
             var instance = (Figure)inf.Invoke(new object[] { });
             instance.pointBegin = pointBegin;
             instance.pointEnd = pointEnd;
-            //((Ellipse)instance).initDef(pointBegin, pointEnd);
-            //ConstructorInfo inf = currentFigure.GetConstructor(new Type[] { typeof(Point), typeof(Point) });
-            //var instance = (Figure)inf.Invoke(new object[] {}, param);
-
             figlst.addToList(instance);
             figlst.DrawList();
         }
@@ -116,13 +87,7 @@ namespace OOPpaint1
 
         private void figureToolStripMenuItem_Click(object sender, EventArgs e)
         {   
-            formD.Show();
-            radioButtonLine.Checked = false;
-            radioButtonRect.Checked = false;
-            radioButtonEllipse.Checked = false;
-            radioButtonTriangle.Checked = false;
-            radioButtonSquare.Checked = false;
-            radioButtonCircle.Checked = false;
+            formD.Show();            
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -133,6 +98,10 @@ namespace OOPpaint1
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveFileDialog.ShowDialog();
+        }
+        private void addFigureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialogDll.ShowDialog();
         }
 
         private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
@@ -154,6 +123,56 @@ namespace OOPpaint1
             figlst.DrawList();
         }
 
+        private void openFileDialogDll_FileOk(object sender, CancelEventArgs e)
+        {
+            Type[] ListTypes;
+            if (System.IO.File.Exists(openFileDialogDll.FileName))
+            {
+                Assembly Ass = Assembly.LoadFrom(openFileDialogDll.FileName);
+                ListTypes = Ass.GetTypes(); // Чтение всех типов
 
+                //foreach (Type j in ListTypes)
+                //{
+                //    Debug.WriteLine(j);
+                //}
+                /*
+                Type[] temp = new Type[ListTypes.Length + lListOfBs.Length];
+                int i = 0;
+                foreach (Type j in lListOfBs)
+                {
+                    temp[i] = j;
+                    i++;
+                    Debug.WriteLine(temp[i]);
+
+                }
+                foreach (Type j in ListTypes)
+                {
+                    temp[i] = j;
+                    i++;
+                    Debug.WriteLine(temp[i]);
+                }
+                */
+                //lListOfBs = (from lAssembly in AppDomain.CurrentDomain.GetAssemblies()
+                //             from lType in lAssembly.GetTypes()
+                //             where typeof(Figure).IsAssignableFrom(lType)
+                //             select lType).ToArray();
+
+                //figureToolStripMenuItem.DropDownItems.Clear();
+                //foreach (Type j in lListOfBs)
+                //{
+                //    if (j.Name != "Figure")
+                //        figureToolStripMenuItem.DropDownItems.Add(j.Name);
+                //}
+
+                //foreach (ToolStripMenuItem i in figureToolStripMenuItem.DropDownItems)
+                //{
+                //    i.Click += new EventHandler(setCurrentFigure);
+                //} 
+            }
+            else
+            {
+                MessageBox.Show("Dll не найдена:" + openFileDialogDll.FileName);
+            }
+        }
     }
 }
