@@ -23,7 +23,7 @@ namespace OOPpaint1
         public static Type currentFigure;
         Point pointBegin, pointEnd;
         FigureList figlst;
-        Type[] lListOfBs;
+        List<Type> lListOfBs;
 
         public FormMain()
         {
@@ -35,9 +35,7 @@ namespace OOPpaint1
             lListOfBs = (from lAssembly in AppDomain.CurrentDomain.GetAssemblies()
                          from lType in lAssembly.GetTypes()
                          where typeof(Figure).IsAssignableFrom(lType)
-                         select lType).ToArray();
-
-
+                         select lType).ToList();
 
             foreach (Type j in lListOfBs)
             {
@@ -129,49 +127,17 @@ namespace OOPpaint1
             if (System.IO.File.Exists(openFileDialogDll.FileName))
             {
                 Assembly Ass = Assembly.LoadFrom(openFileDialogDll.FileName);
-                ListTypes = Ass.GetTypes(); // Чтение всех типов
-
-                //foreach (Type j in ListTypes)
-                //{
-                //    Debug.WriteLine(j);
-                //}
-                /*
-                Type[] temp = new Type[ListTypes.Length + lListOfBs.Length];
-                int i = 0;
-                foreach (Type j in lListOfBs)
-                {
-                    temp[i] = j;
-                    i++;
-                    Debug.WriteLine(temp[i]);
-
-                }
+                ListTypes = Ass.GetTypes();
                 foreach (Type j in ListTypes)
                 {
-                    temp[i] = j;
-                    i++;
-                    Debug.WriteLine(temp[i]);
+                    lListOfBs.Add(j);
+                    figureToolStripMenuItem.DropDownItems.Add(j.Name);
+                    figureToolStripMenuItem.DropDownItems[lListOfBs.Count - 2].Click += new EventHandler(setCurrentFigure);
                 }
-                */
-                //lListOfBs = (from lAssembly in AppDomain.CurrentDomain.GetAssemblies()
-                //             from lType in lAssembly.GetTypes()
-                //             where typeof(Figure).IsAssignableFrom(lType)
-                //             select lType).ToArray();
-
-                //figureToolStripMenuItem.DropDownItems.Clear();
-                //foreach (Type j in lListOfBs)
-                //{
-                //    if (j.Name != "Figure")
-                //        figureToolStripMenuItem.DropDownItems.Add(j.Name);
-                //}
-
-                //foreach (ToolStripMenuItem i in figureToolStripMenuItem.DropDownItems)
-                //{
-                //    i.Click += new EventHandler(setCurrentFigure);
-                //} 
             }
             else
             {
-                MessageBox.Show("Dll не найдена:" + openFileDialogDll.FileName);
+                MessageBox.Show("Dll not found:" + openFileDialogDll.FileName);
             }
         }
     }
